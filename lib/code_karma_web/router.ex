@@ -19,6 +19,13 @@ defmodule CodeKarmaWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", CodeKarmaWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CodeKarmaWeb do
   #   pipe_through :api
