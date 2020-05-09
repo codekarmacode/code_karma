@@ -1,5 +1,14 @@
 use Mix.Config
 
+# Configure your database
+config :code_karma, CodeKarma.Repo,
+  username: "postgres",
+  password: "postgres",
+  database: "code_karma_dev",
+  hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -49,10 +58,10 @@ config :code_karma, CodeKarmaWeb.Endpoint,
 config :code_karma, CodeKarmaWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{priv/gettext/.*(po)$},
-      ~r{lib/code_karma_web/views/.*(ex)$},
-      ~r{lib/code_karma_web/templates/.*(eex)$}
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/code_karma_web/(live|views)/.*(ex)$",
+      ~r"lib/code_karma_web/templates/.*(eex)$"
     ]
   ]
 
@@ -65,11 +74,3 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-# Configure your database
-config :code_karma, CodeKarma.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "code_karma_dev",
-  hostname: "localhost",
-  pool_size: 10

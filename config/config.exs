@@ -13,9 +13,10 @@ config :code_karma,
 # Configures the endpoint
 config :code_karma, CodeKarmaWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "WDeH31Xeyyw7teO8YsBsUjXNDTFB2sQLjWTAknX5B8myHtd9DAgZ3mUZeFLeAw3a",
-  render_errors: [view: CodeKarmaWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: CodeKarma.PubSub, adapter: Phoenix.PubSub.PG2]
+  secret_key_base: "qBDrtUCuKaKYIMDovjgMGemEvK0gGBtfnmNsZZOVzzEpfSvFibD3Xy7pTj/OKrRP",
+  render_errors: [view: CodeKarmaWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: CodeKarma.PubSub,
+  live_view: [signing_salt: "7s9hqZT8"]
 
 # Configures Elixir's Logger
 config :logger, :console,
