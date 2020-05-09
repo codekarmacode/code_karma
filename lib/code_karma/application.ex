@@ -6,14 +6,17 @@ defmodule CodeKarma.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
       # Start the Ecto repository
       CodeKarma.Repo,
-      # Start the endpoint when the application starts
+      # Start the Telemetry supervisor
+      CodeKarmaWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: CodeKarma.PubSub},
+      # Start the Endpoint (http/https)
       CodeKarmaWeb.Endpoint
-      # Starts a worker by calling: CodeKarma.Worker.start_link(arg)
-      # {CodeKarma.Worker, arg},
+      # Start a worker by calling: CodeKarma.Worker.start_link(arg)
+      # {CodeKarma.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
