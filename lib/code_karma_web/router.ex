@@ -9,12 +9,22 @@ defmodule CodeKarmaWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :authenticate do
+    plug(CodeKarmaWeb.SessionUserPlug)
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", CodeKarmaWeb do
     pipe_through :browser
+
+    get "/", PageController, :index
+  end
+
+  scope "/app", CodeKarmaWeb, as: :app do
+    pipe_through [:browser, :authenticate]
 
     get "/", PageController, :index
   end
